@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>角色权限设置</title>
+<link rel="stylesheet" type="text/css" href="ui/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="ui/themes/icon.css">
+<script type="text/javascript" src="ui/jquery.min.js"></script>
+<script type="text/javascript" src="ui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="ui/locale/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="ui/jquery.serializejson.min.js"></script>
+<script type="text/javascript" src="js/roleMenuSet.js"></script>
+</head>
+<body class="easyui-layout">
+
+<div data-options="region:'west',title:'请选择角色',split:true" style="width:230px;">
+	<table class="easyui-datagrid" data-options="url:'role_list.action',singleSelect:true,onClickRow:clickRow">
+	   <thead>
+	   	  	<tr>
+	   	  		<th data-options="field:'uuid',width:100">角色ID</th>
+	   	  		<th data-options="field:'name',width:100">角色名称</th>
+	   		</tr>
+	   </thead>
+	</table>
+</div>   
+<div data-options="region:'center',title:'请设置权限'" style="padding:5px;background:#eee;">
+	<ul id="tree"></ul>
+	<button onclick="save()">保存</button>
+</div> 
+
+</body>
+</html>

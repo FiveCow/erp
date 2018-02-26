@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>tree控件入门小Demo</title>
+<link rel="stylesheet" type="text/css" href="ui/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="ui/themes/icon.css">
+<script type="text/javascript" src="ui/jquery.min.js"></script>
+<script type="text/javascript" src="ui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="ui/locale/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="ui/jquery.serializejson.min.js"></script>
+<script type="text/javascript">
+
+$(function(){
+	
+	$('#tree').tree({
+		url:'role_readRoleMenus.action',
+		animate:true,
+		checkbox:true
+	});
+	
+});
+
+
+</script>
+
+</head>
+<body>
+<ul id="tree"></ul>
+</body>
+</html>

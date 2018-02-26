@@ -1,0 +1,20 @@
+package cn.itcast.erp.dao;
+
+import java.util.List;
+
+import cn.itcast.erp.entity.StoreAlert;
+import cn.itcast.erp.entity.Storedetail;
+/**
+ * 仓库库存数据访问接口
+ * @author Administrator
+ *
+ */
+public interface IStoredetailDao extends IBaseDao<Storedetail>{
+	
+	/**
+	 * 查询库存预警报表
+	 * @return
+	 */
+	public List<StoreAlert> getStoreAlertList();
+	
+}

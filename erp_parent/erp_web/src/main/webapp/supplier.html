@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>供应商及客户管理</title>
+<link rel="stylesheet" type="text/css" href="ui/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="ui/themes/icon.css">
+<script type="text/javascript" src="ui/jquery.min.js"></script>
+<script type="text/javascript" src="ui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="ui/locale/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="ui/jquery.serializejson.min.js"></script>
+<script type="text/javascript" src="js/request.js"></script>
+<script type="text/javascript" src="js/download.js"></script>
+<script type="text/javascript" src="js/crud.js"></script>
+
+<script type="text/javascript">
+	var name="supplier";
+	var columns=[[
+	  		    {field:'uuid',title:'编号',width:100},
+	  		    {field:'name',title:'名称',width:100},
+	  		    {field:'address',title:'地址',width:100},
+	  		    {field:'contact',title:'联系人',width:100},
+	  		    {field:'tele',title:'电话',width:100},
+	  		    {field:'email',title:'EMAIL',width:100}, 		  
+
+			    {field:'-',title:'操作',width:200,formatter:function(value,row,index)
+			    	{
+			    		return "<a href='#' onclick='edit("+row.uuid+")'>修改</a> <a href='#' onclick='dele("+row.uuid+")'>删除</a>";
+			    	}}		    
+			          ]];
+	
+	if(Request['type']=='1'){
+		document.title="供应商管理";
+	}
+	if(Request['type']=='2'){
+		document.title="客户管理";
+	}
+	
+	
+	
+	var listParam='?t1.type='+Request['type'];
+	var saveParam='?t.type='+Request['type'];
+	
+	
+	
+</script>
+</head>
+<body>
+<div class="easyui-panel">
+<form id="searchForm">
+	名称：<input name="t1.name" >
+	地址：<input name="t1.address" >
+	联系人：<input name="t1.contact" >
+	电话：<input name="t1.tele" >
+	EMAIL：<input name="t1.email" >
+	<button type="button" id="btnSearch">查询</button>
+</form>
+</div>
+<table id="grid"></table>
+<div id="editWindow" class="easyui-window" title="编辑" 
+	style="width: 300px;height: 200px" data-options="closed:true">
+	<form id="editForm">
+	<input name="t.uuid" type="hidden"> 
+
+		<table>
+			<tr>
+				<td>名称</td><td><input name="t.name"> </td>
+			</tr>
+			<tr>
+				<td>地址</td><td><input name="t.address"> </td>
+			</tr>
+			<tr>
+				<td>联系人</td><td><input name="t.contact"> </td>
+			</tr>
+			<tr>
+				<td>电话</td><td><input name="t.tele"> </td>
+			</tr>
+			<tr>
+				<td>EMAIL</td><td><input name="t.email"> </td>
+			</tr>			
+		</table>	
+		<button id="btnSave" type="button">保存</button>
+	</form>
+</div>
+
+<!-- 导入窗口 -->
+<div id="uploadWindow" class="easyui-window" style="width: 450px;height: 100px" title="数据导入" data-options="closed:true">
+<form id="uploadForm" enctype="multipart/form-data">
+	请选择文件：<input name="file" type="file"> <button type="button" id="btnUpload">导入</button>
+
+</form>
+</div>
+
+</body>
+</html>

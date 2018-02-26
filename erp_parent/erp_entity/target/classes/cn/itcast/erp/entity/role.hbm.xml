@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="cn.itcast.erp.entity.Role" table="role" >
+        <id name="uuid" >
+        	<generator class="org.hibernate.id.SequenceGenerator"> <param name="sequence">role_seq</param> </generator>
+        </id>
+
+        <property name="name" /> 
+ 		
+ 		<!-- 角色权限多对多配置 -->
+ 		<bag name="menus" order-by="menuuuid" table="role_menu">
+ 			<key column="roleuuid"></key>
+ 			<many-to-many class="cn.itcast.erp.entity.Menu" column="menuuuid"></many-to-many>
+ 		</bag>
+ 		
+ 		<!-- 角色员工多对多配置 -->
+ 		<bag name="emps" order-by="empuuid" table="emp_role">
+ 			<key column="roleuuid"></key>
+ 			<many-to-many class="cn.itcast.erp.entity.Emp" column="empuuid"></many-to-many>
+ 		</bag>
+ 		
+    </class>
+</hibernate-mapping>

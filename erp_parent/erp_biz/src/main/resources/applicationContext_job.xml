@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans.xsd">  
+	
+	<!-- 定义一个任务类 -->
+	<bean id="mailJob" class="cn.itcast.erp.job.MailJob">
+		<property name="storedetailBiz" ref="storedetailBiz"></property>
+	</bean>
+	<!-- 任务类描述 -->
+	<bean id="mailJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="mailJob"></property>
+		<property name="targetMethod" value="sendStoreAlertMail"></property>
+	</bean>
+	<!-- 触发器  定义在什么时间做什么事 -->
+	<bean id="mailTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="mailJobDetail"></property>
+		<!-- 时间规则的定义  cron表达式(七子表达式)  域   间隔10秒自动执行    -->
+		<property name="cronExpression" value="0 4 16,18 * * ?"></property>
+	</bean>
+	<!-- 总管理容器 -->
+	<bean id="startQuartz" class="org.springframework.scheduling.quartz.SchedulerFactoryBean" >
+		<property name="triggers">
+			<list>
+				<ref bean="mailTrigger"/>
+			</list>
+		</property>
+	</bean>
+	
+</beans>
+	
